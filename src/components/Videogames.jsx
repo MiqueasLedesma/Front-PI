@@ -5,7 +5,7 @@ import { Pagination } from './Pagination';
 import loader_logo from '../images/loader.gif';
 import { Card } from './Card';
 
-const CardsContainers = styled.div`
+export const CardsContainers = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4 , 1fr);
@@ -23,7 +23,8 @@ export const Videogames = () => {
         return {
             name: e.name,
             image: e.image,
-            rating: e.rating
+            rating: e.rating,
+            id: e.id
         }
     })
 
@@ -37,7 +38,7 @@ export const Videogames = () => {
             <CardsContainers >
                 {toRender && toRender.map(e =>
                     <div>
-                        <Card name={e.name} image={e.image} rating={e.rating} />
+                        <Card name={e.name} image={e.image} rating={e.rating} id={e.id} />
                     </div>
                 )}
             </CardsContainers>

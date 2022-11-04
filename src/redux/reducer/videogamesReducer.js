@@ -1,9 +1,13 @@
-import { GET_VIDEOGAMES } from "../actions/videogamesActions";
+import { GET_SEARCH_GAMES, GET_VIDEOGAMES } from "../actions/videogamesActions";
 
 const initialState = {
     videogames: [],
-    page: 0
+    page: 0,
+    searchGames: [],
+    search: false
 };
+
+console.log(initialState.search)
 
 export default function videogamesReducer(state = initialState, action) {
     switch (action.type) {
@@ -13,7 +17,14 @@ export default function videogamesReducer(state = initialState, action) {
                 videogames: action.payload,
                 page: action.page
             };
-        default: return state;
+        case GET_SEARCH_GAMES:
+            return {
+                ...state,
+                searchGames: action.payload,
+
+            }
+        default:
+            return state;
     };
 };
 

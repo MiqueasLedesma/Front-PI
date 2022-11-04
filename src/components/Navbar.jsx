@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { theme } from '../index'
 import { changeTheme } from '../redux/actions/themeActions'
+import { getSearchGames } from '../redux/actions/videogamesActions'
 import { MenuIcon } from './MenuIcon'
 
 const MyLink = styled(Link)`
@@ -118,19 +119,32 @@ const BgDiv = styled.div`
 `
 
 export const Navbar = ({ state, setState }) => {
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [clicked, setClick] = useState(false);
     const [darkmode, setDarkmode] = useState(localStorage.theme);
+    const [input, setInput] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
+        dispatch(getSearchGames(input));
+        setInput('');
+        navigate('/search');
+        setClick(false);
+        setState(false);
+        
     };
 
-    const handleClick = () => {
+    const handleClick = e => {
         setClick(false);
         setState(false);
     }
+
+    const handleChange = e => {
+        setInput(e.target.value);
+    }
+
 
     const handleTheme = () => {
 
@@ -148,6 +162,8 @@ export const Navbar = ({ state, setState }) => {
 
 
     if (window.innerWidth > 768 && clicked) setClick(!clicked);
+    const reduxState = useSelector(state => state.videogamesReducer.searchGames);
+    if (reduxState === 0) navigate('/');
 
     return (
         <ThemeProvider theme={theme}>
@@ -166,7 +182,7 @@ export const Navbar = ({ state, setState }) => {
                         </span>
                     }</MyLink>
                     <form onSubmit={handleSubmit}>
-                        <input type="text" />
+                        <input type="text" value={input} onChange={handleChange} />
                         <button>Search</button>
                     </form>
                 </div>

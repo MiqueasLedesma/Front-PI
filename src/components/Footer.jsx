@@ -128,7 +128,7 @@ export const Footer = () => {
                             </p>
                         </Box>
                         <Box className="box">
-                            <h2>My social networks</h2>
+                            <h2>My social networks:</h2>
                             <a href='https://www.linkedin.com/in/miqueas-ledesma-08a106246/' target='_blank'><img src={linkedin_logo} alt="img" /></a>
                             <a href='https://github.com/MiqueasLedesma' target='_bla'><img src={github_logo} alt="img" /></a>
 

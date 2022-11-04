@@ -20,9 +20,10 @@ const CardContainer = styled.div`
     }
 
 `
-export const Card = ({ name, image, rating }) => {
+export const Card = ({ name, image, rating, id }) => {
     const navigate = useNavigate();
     const handleClick = e => {
+        
         navigate('/detail');
     }
     return (
