@@ -69,7 +69,6 @@ export const getSearchGames = name => async dispatch => {
                     search: true
                 })
             })
-        // .then(window.history.go('/search'))
     } catch (error) {
         console.log(error.message)
     }

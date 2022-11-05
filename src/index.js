@@ -10,7 +10,9 @@ export const theme = {
   primary: 'black',
   secundary: 'gray',
   primaryBack: '#00313f',
-  secundaryBack: '#ccd7ed'
+  secundaryBack: '#ccd7ed',
+  letterPrimary: 'white',
+  letterSecundary: 'black'
 }
 
 ReactDOM.render(

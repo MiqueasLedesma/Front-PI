@@ -18,7 +18,7 @@ const NavContainer = styled.nav`
     z-index: -1;
     h2 {
         user-select: none;
-        color: white;
+        color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
         font-weight: 400;
         span{
             user-select: none;
@@ -45,7 +45,7 @@ const NavContainer = styled.nav`
         /* transition: all .5s ease; */
         ${MyLink}{
             user-select: none;
-            color: white;
+            color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
             font-size: 2rem;
             display: block;
             padding: 0.8rem;
@@ -67,7 +67,7 @@ const NavContainer = styled.nav`
                 height: 2rem;
                 background-color: #4CAF50;
                 border: none;
-                color: white;
+                color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
                 text-align: center;
                 text-decoration: none;
                 font-size: 16px;

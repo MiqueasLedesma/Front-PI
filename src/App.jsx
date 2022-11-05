@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getVideogames } from './redux/actions/videogamesActions';
 import { theme } from './index';
 import { SearchGames } from './components/SearchGames';
+import { Detail } from './components/Detail';
 
 const AppContainer = styled.div`
     margin: 0;
@@ -40,7 +41,7 @@ function App() {
           <Route path='/' element={state ? null : <Videogames />} />
           <Route path='/create' element={state ? null : <CreateGame />} />
           <Route path='/about' element={state ? null : <About />} />
-          <Route path='/detail' element={state ? null : <h2>Aca vendrian los detalles del juego</h2>} />
+          <Route path='/detail' element={state ? null : <Detail />} />
           <Route path='/search' element={state ? null : <SearchGames />} />
         </Routes>
         {state ? null : <Footer />}

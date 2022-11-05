@@ -57,12 +57,12 @@ const FooterContainer = styled.div`
 
         }
         h2 {
-            color: white;
+            color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
             margin-bottom: 25px;
             font-size: 20px;
         }
         p {
-            color: #efefef;
+            color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
             margin-bottom: 10px;
             img {
                 width: 25px;
@@ -82,7 +82,7 @@ const FooterContainer = styled.div`
     ${Group2} {
         background-color: #0a1a2a;
         padding: 15px 10px;
-        color: white;
+        color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
         text-align: center;
     }
 

@@ -1,6 +1,8 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { getGamesById } from '../redux/actions/videogamesActions'
 import { Stars } from './Stars'
 
 const CardContainer = styled.div`
@@ -21,9 +23,10 @@ const CardContainer = styled.div`
 
 `
 export const Card = ({ name, image, rating, id }) => {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const handleClick = e => {
-        
+        dispatch(getGamesById(id));
         navigate('/detail');
     }
     return (
