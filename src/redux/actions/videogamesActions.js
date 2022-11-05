@@ -14,7 +14,7 @@ export const getVideogames = page => async dispatch => {
             payload: [],
             page: page || 0
         })
-        axios.get(`https://miqueaswebapi.onrender.com/videogames?page=${page || 0}`)
+        axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames?page=${page || 0}`)
             .then(r => {
                 return dispatch({
                     type: GET_VIDEOGAMES,
@@ -34,7 +34,7 @@ export const getGamesById = id => async dispatch => {
             type: GET_VG_ID,
             payload: []
         })
-        axios.get(`https://miqueaswebapi.onrender.com/videogames/detail?id=${id}`)
+        axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/detail?id=${id}`)
             .then(r => {
                 return dispatch({
                     type: GET_VG_ID,
@@ -54,7 +54,7 @@ export const getSearchGames = name => async dispatch => {
             payload: [],
             search: false
         })
-        await axios.get(`https://miqueaswebapi.onrender.com/videogames/search?name=${name}`)
+        await axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/search?name=${name}`)
             .then(r => {
                 if (r.data.length === 0) {
                     return Swal.fire({
