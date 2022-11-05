@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
+import { theme } from '../index';
 import loader_logo from '../images/loader.gif';
 
 const DetailContainer = styled.div`
@@ -28,7 +29,7 @@ export const Detail = () => {
     if (loading) return <img src={loader_logo} style={{ width: `${window.innerWidth}px` }} alt={loader_logo} />
 
     return (
-        <ThemeProvider>
+        <ThemeProvider theme={theme}>
             <DetailContainer>
                 <br />
                 <img src={reduxState.image} alt="img" />
