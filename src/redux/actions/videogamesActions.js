@@ -6,26 +6,59 @@ export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
 export const GET_VG_ID = 'GET_VG_ID';
 export const GET_SEARCH_GAMES = 'GET_SEARCH_GAMES';
 
-export const getVideogames = page => async dispatch => {
+// export const getVideogames = page => async dispatch => {
+//     window.scrollTo(0, -2000);
+//     try {
+//         dispatch({
+//             type: GET_VIDEOGAMES,
+//             payload: [],
+//             page: page || 0,
+//             category: category || false,
+//             type: type || false,
+//             sort: sort || false
+//         })
+//         axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames?page=${page || 0}`)
+//             .then(r => {
+//                 return dispatch({
+//                     type: GET_VIDEOGAMES,
+//                     payload: r.data,
+//                     page: page || 0,
+//                     category: category || false,
+//                     type: type || false,
+//                     sort: sort || false
+//                 })
+//             })
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+
+export const getVideogames = obj => async dispatch => {
     window.scrollTo(0, -2000);
+    const { page, category, param, sort } = obj;
     try {
         dispatch({
             type: GET_VIDEOGAMES,
             payload: [],
-            page: page || 0
+            page: page || 0,
+            category: category || false,
+            param: param || false,
+            sort: sort || false
         })
-        axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames?page=${page || 0}`)
-            .then(r => {
-                return dispatch({
-                    type: GET_VIDEOGAMES,
-                    payload: r.data,
-                    page: page || 0
-                })
-            })
+        axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/filter?page=${page || 0}${category ? '&category=' + category : ''}${param ? '&type=' + param : ''}${sort ? '&sort=' + sort : ''}`)
+            .then(r => dispatch({
+                type: GET_VIDEOGAMES,
+                payload: r.data,
+                page: page || 0,
+                category: category || false,
+                param: param || false,
+                sort: sort || false
+            }))
     } catch (error) {
-        console.log(error.message);
+        console.log(error.message)
     }
 }
+
 
 export const getGamesById = id => async dispatch => {
     window.scrollTo(0, -2000);
@@ -51,8 +84,7 @@ export const getSearchGames = name => async dispatch => {
     try {
         dispatch({
             type: GET_SEARCH_GAMES,
-            payload: [],
-            search: false
+            payload: []
         })
         await axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/search?name=${name}`)
             .then(r => {
@@ -65,8 +97,7 @@ export const getSearchGames = name => async dispatch => {
                 }
                 return dispatch({
                     type: GET_SEARCH_GAMES,
-                    payload: r.data,
-                    search: true
+                    payload: r.data
                 })
             })
     } catch (error) {

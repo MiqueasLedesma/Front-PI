@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { Pagination } from './Pagination';
 import loader_logo from '../images/loader.gif';
 import { Card } from './Card';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getVideogames } from '../redux/actions/videogamesActions';
+import { useDispatch } from 'react-redux';
 
 export const CardsContainers = styled.div`
     width: 100%;
@@ -17,8 +21,17 @@ export const CardsContainers = styled.div`
 
 
 export const Videogames = () => {
-
+    const dispatch = useDispatch();
+    const [state, setState] = useState({ page: 0 });
     const reduxState = useSelector(state => state.videogamesReducer.videogames);
+
+    useEffect(() => {
+        let changeRedux = () => {
+            dispatch(getVideogames(state));
+        }
+        changeRedux()
+    }, [state])
+
     const toRender = reduxState.content && reduxState.content.map(e => {
         return {
             name: e.name,
@@ -28,13 +41,12 @@ export const Videogames = () => {
         }
     })
 
-
     if (!reduxState.content) return (
         <img src={loader_logo} style={{ width: `${window.innerWidth}px` }} alt={loader_logo} />
     )
 
     return (
-        <div style={{textAlign: 'center'}}>
+        <div style={{ textAlign: 'center' }}>
             <CardsContainers >
                 {toRender && toRender.map(e =>
                     <div>
@@ -42,7 +54,7 @@ export const Videogames = () => {
                     </div>
                 )}
             </CardsContainers>
-            <Pagination />
+            <Pagination state={state} setState={setState} />
         </div>
     )
 }

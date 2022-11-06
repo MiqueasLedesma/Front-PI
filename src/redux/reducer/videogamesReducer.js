@@ -2,10 +2,13 @@ import { GET_SEARCH_GAMES, GET_VG_ID, GET_VIDEOGAMES } from "../actions/videogam
 
 const initialState = {
     videogames: [],
+    searchGames: 'not',
+    detail: 'not',
     page: 0,
-    searchGames: [],
     search: false,
-    detail: []
+    category: false,
+    param: false,
+    sort: false
 };
 
 export default function videogamesReducer(state = initialState, action) {
@@ -14,7 +17,10 @@ export default function videogamesReducer(state = initialState, action) {
             return {
                 ...state,
                 videogames: action.payload,
-                page: action.page
+                page: action.page,
+                param: action.param,
+                sort: action.sort,
+                category: action.category
             };
         case GET_SEARCH_GAMES:
             return {
@@ -22,11 +28,11 @@ export default function videogamesReducer(state = initialState, action) {
                 searchGames: action.payload,
 
             };
-        case GET_VG_ID: 
-        return {
-            ...state,
-            detail: action.payload
-        }
+        case GET_VG_ID:
+            return {
+                ...state,
+                detail: action.payload
+            }
         default:
             return state;
     };

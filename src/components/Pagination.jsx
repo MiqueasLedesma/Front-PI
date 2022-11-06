@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'
 import styled from 'styled-components';
@@ -35,23 +35,24 @@ const PaginateContainer = styled.div`
     }
 `
 
-export const Pagination = () => {
+export const Pagination = ({ state, setState }) => {
     const dispatch = useDispatch();
-    const reduxState = useSelector(state => state.videogamesReducer.videogames);
-    const reduxState2 = useSelector(state => state.videogamesReducer.page);
+    const reduxState = useSelector(e => e.videogamesReducer.videogames);
+    const currentPage = useSelector(e => e.videogamesReducer.page);
     const toRender = reduxState.pages;
-    const [currentPage, setCurrentPage] = useState('0');
-
     const handleClick = (e) => {
-        e && setCurrentPage(e.target.value);
-        e && dispatch(getVideogames(e.target.value));
+        setState({
+            ...state,
+            page: e.target.value
+        });
+        dispatch(getVideogames({ ...state }));
         return window.scrollTo(0, -1000);
     }
 
     const paginate = (pages) => {
         let arr = [];
         for (let i = 0; i < pages; i++) {
-            arr.push(<button key={i} onClick={handleClick} className={reduxState2 == i ? 'active' : ''} value={i}>{i + 1}</button>)
+            arr.push(<button key={i} onClick={handleClick} className={currentPage == i ? 'active' : ''} value={i}>{i + 1}</button>)
         }
         return arr;
     }
@@ -59,7 +60,7 @@ export const Pagination = () => {
     return (
         <PaginateContainer>
             <div className='pagination'>
-            {toRender && paginate(toRender)}
+                {toRender && paginate(toRender)}
             </div>
         </PaginateContainer>
     )

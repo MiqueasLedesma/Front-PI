@@ -22,7 +22,6 @@ if (!localStorage.theme) localStorage.setItem('theme', 'ligth');
 
 function App() {
   const reduxState = useSelector(state => state.themeReducer.theme);
-  const dispatch = useDispatch()
   const [state, setState] = useState(false);
   const [thema, setTheme] = useState('');
   useEffect(() => {
@@ -30,7 +29,6 @@ function App() {
       setTheme(reduxState)
     }
     changeRedux();
-    dispatch(getVideogames());
   }, [thema])
 
   return (
