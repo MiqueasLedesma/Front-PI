@@ -38,7 +38,7 @@ export const Detail = () => {
                 <br />
                 <h2>{reduxState.name}</h2>
                 <img src={reduxState.image} alt="img" />
-                <h5>Platforms: {reduxState.platforms.join(' ')}</h5>
+                <h5>Platforms: {reduxState.platforms.join(', ')}</h5>
                 {/* <h5>Genres: {reduxState.genres.map(e => e.name).join(' ')}</h5> */}
                 <br />
                 <p>{reduxState.description}</p>

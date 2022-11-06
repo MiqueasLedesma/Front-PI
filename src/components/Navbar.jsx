@@ -171,7 +171,7 @@ export const Navbar = ({ state, setState }) => {
                 <MyLink to={'/'} onClick={handleClick}><h2>App <span>Videogames!</span></h2></MyLink>
                 <div className={`links ${clicked ? 'active' : null}`} active>
                     <MyLink to={'/create'} onClick={handleClick}>Create</MyLink>
-                    <MyLink to={'/about'} onClick={handleClick}>About</MyLink>
+                    {/* <MyLink to={'/about'} onClick={handleClick}>About</MyLink> */}
                     <MyLink onClick={handleTheme}>{darkmode === 'ligth' ?
                         <span className="material-symbols-outlined">
                             light_mode

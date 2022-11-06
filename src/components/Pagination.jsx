@@ -45,7 +45,7 @@ export const Pagination = ({ state, setState }) => {
             ...state,
             page: e.target.value
         });
-        dispatch(getVideogames({ ...state }));
+        dispatch(getVideogames(state));
         return window.scrollTo(0, -1000);
     }
 

@@ -1,37 +1,9 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-
 export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
 export const GET_VG_ID = 'GET_VG_ID';
 export const GET_SEARCH_GAMES = 'GET_SEARCH_GAMES';
-
-// export const getVideogames = page => async dispatch => {
-//     window.scrollTo(0, -2000);
-//     try {
-//         dispatch({
-//             type: GET_VIDEOGAMES,
-//             payload: [],
-//             page: page || 0,
-//             category: category || false,
-//             type: type || false,
-//             sort: sort || false
-//         })
-//         axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames?page=${page || 0}`)
-//             .then(r => {
-//                 return dispatch({
-//                     type: GET_VIDEOGAMES,
-//                     payload: r.data,
-//                     page: page || 0,
-//                     category: category || false,
-//                     type: type || false,
-//                     sort: sort || false
-//                 })
-//             })
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
 
 export const getVideogames = obj => async dispatch => {
     window.scrollTo(0, -2000);
@@ -46,14 +18,21 @@ export const getVideogames = obj => async dispatch => {
             sort: sort || false
         })
         axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/filter?page=${page || 0}${category ? '&category=' + category : ''}${param ? '&type=' + param : ''}${sort ? '&sort=' + sort : ''}`)
-            .then(r => dispatch({
-                type: GET_VIDEOGAMES,
-                payload: r.data,
-                page: page || 0,
-                category: category || false,
-                param: param || false,
-                sort: sort || false
-            }))
+            .then(r => {
+                if (r.data.content.length === 0) return Swal.fire({
+                    title: "No match",
+                    text: "The database don't have any game like that!",
+                    type: "success"
+                }).then(() => window.history.go('/'))
+                return dispatch({
+                    type: GET_VIDEOGAMES,
+                    payload: r.data,
+                    page: page || 0,
+                    category: category || false,
+                    param: param || false,
+                    sort: sort || false
+                })
+            })
     } catch (error) {
         console.log(error.message)
     }

@@ -7,6 +7,7 @@ import { Stars } from './Stars'
 
 const CardContainer = styled.div`
     .card {
+        user-select: none;
         border: none;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
@@ -14,6 +15,7 @@ const CardContainer = styled.div`
         &:hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             width: 100%;
+            cursor: pointer;
         }
         .container {
             padding: 2px 16px;

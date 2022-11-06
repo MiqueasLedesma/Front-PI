@@ -38,7 +38,7 @@ function App() {
         <Routes>
           <Route path='/' element={state ? null : <Videogames />} />
           <Route path='/create' element={state ? null : <CreateGame />} />
-          <Route path='/about' element={state ? null : <About />} />
+          {/* <Route path='/about' element={state ? null : <About />} /> */}
           <Route path='/detail' element={state ? null : <Detail />} />
           <Route path='/search' element={state ? null : <SearchGames />} />
         </Routes>

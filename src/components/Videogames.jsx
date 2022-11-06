@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getVideogames } from '../redux/actions/videogamesActions';
 import { useDispatch } from 'react-redux';
+import { Filters } from './Filters';
 
 export const CardsContainers = styled.div`
     width: 100%;
@@ -26,7 +27,7 @@ export const Videogames = () => {
     const reduxState = useSelector(state => state.videogamesReducer.videogames);
 
     useEffect(() => {
-        let changeRedux = () => {
+        const changeRedux = () => {
             dispatch(getVideogames(state));
         }
         changeRedux()
@@ -47,6 +48,7 @@ export const Videogames = () => {
 
     return (
         <div style={{ textAlign: 'center' }}>
+            <Filters state={state} setState={setState} />
             <CardsContainers >
                 {toRender && toRender.map(e =>
                     <div>
