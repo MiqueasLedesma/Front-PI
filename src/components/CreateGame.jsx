@@ -48,7 +48,7 @@ export const CreateGame = () => {
   const rating = [1, 2, 3, 4, 5];
 
   useEffect(() => {
-    axios.get('https://webapivideogames-miqueas.herokuapp.com/genres')
+    axios.get('https://miqueaswebapi.onrender.com/genres')
       .then(r => setgenres(r.data))
   }, []);
 

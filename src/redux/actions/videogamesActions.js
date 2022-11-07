@@ -14,7 +14,7 @@ export const getVideogames = obj => async dispatch => {
             payload: [],
             page: page || 0,
         })
-        axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/filter?page=${page || 0}${category ? '&category=' + category : ''}${param ? '&type=' + param : ''}${sort ? '&sort=' + sort : ''}`)
+        axios.get(`https://miqueaswebapi.onrender.com/videogames/filter?page=${page || 0}${category ? '&category=' + category : ''}${param ? '&type=' + param : ''}${sort ? '&sort=' + sort : ''}`)
             .then(r => {
                 if (r.data.content.length === 0) return Swal.fire({
                     title: "No match",
@@ -43,7 +43,7 @@ export const getGamesById = id => async dispatch => {
             type: GET_VG_ID,
             payload: []
         })
-        axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/detail?id=${id}`)
+        axios.get(`https://miqueaswebapi.onrender.com/videogames/detail?id=${id}`)
             .then(r => {
                 return dispatch({
                     type: GET_VG_ID,
@@ -62,7 +62,7 @@ export const getSearchGames = name => async dispatch => {
             type: GET_SEARCH_GAMES,
             payload: []
         })
-        await axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/search?name=${name}`)
+        await axios.get(`https://miqueaswebapi.onrender.com/videogames/search?name=${name}`)
             .then(r => {
                 if (r.data.length === 0) {
                     return Swal.fire({
@@ -84,7 +84,7 @@ export const getSearchGames = name => async dispatch => {
 export const postGame = obj => async () => {
     console.log(obj)
     try {
-        await axios.post('https://webapivideogames-miqueas.herokuapp.com/videogames', obj)
+        await axios.post('https://miqueaswebapi.onrender.com/videogames', obj)
             .then(r => Swal.fire({
                 title: "Succes!",
                 text: r.data,
