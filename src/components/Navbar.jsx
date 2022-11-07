@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
-import { theme } from '../index'
-import { changeTheme } from '../redux/actions/themeActions'
-import { getSearchGames } from '../redux/actions/videogamesActions'
-import { MenuIcon } from './MenuIcon'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+import { theme } from '../index';
+import { changeTheme } from '../redux/actions/themeActions';
+import { getSearchGames } from '../redux/actions/videogamesActions';
+import { MenuIcon } from './MenuIcon';
+import moon_logo from '../images/moon.png';
+import sun_logo from '../images/sun.png';
 
 const MyLink = styled(Link)`
     color: white;
@@ -51,6 +53,7 @@ const NavContainer = styled.nav`
             padding: 0.8rem;
             &:hover{
                 background-color: #04AA6D;
+                border-radius: 10px;
             }
             span {
                 border-radius: 50%;
@@ -96,19 +99,18 @@ const NavContainer = styled.nav`
         ${MyLink}{
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: white;
+            color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
         }
     }
 `
 const BgDiv = styled.div`
     position: absolute;
-    background-color: #222;
+    background-color: ${props => localStorage.theme !== 'dark' ? props.theme.primaryBack : props.theme.secundaryBack};
     top: -700px;
     left: -1000px;
     width: 100vw;
     height: 100vh;
     z-index: -1;
-    /* transition: all .6s ease; */
     &.active {
         border-radius: 0 0 0 0;
         top: 0;
@@ -128,12 +130,12 @@ export const Navbar = ({ state, setState }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if(input === '') return;
         dispatch(getSearchGames(input));
         setInput('');
         navigate('/search');
         setClick(false);
         setState(false);
-        
     };
 
     const handleClick = e => {
@@ -143,6 +145,8 @@ export const Navbar = ({ state, setState }) => {
 
     const handleChange = e => {
         setInput(e.target.value);
+        handleClick(e);
+
     }
 
 
@@ -169,16 +173,13 @@ export const Navbar = ({ state, setState }) => {
             <NavContainer>
                 <MyLink to={'/'} onClick={handleClick}><h2>App <span>Videogames!</span></h2></MyLink>
                 <div className={`links ${clicked ? 'active' : null}`} active>
-                    <MyLink to={'/create'} onClick={handleClick}>Create</MyLink>
-                    {/* <MyLink to={'/about'} onClick={handleClick}>About</MyLink> */}
-                    <MyLink onClick={handleTheme}>{darkmode === 'ligth' ?
-                        <span className="material-symbols-outlined">
-                            light_mode
-                        </span>
-                        :
-                        <span className="material-symbols-outlined">
-                            dark_mode
-                        </span>
+                    <MyLink to={'/create'} onClick={handleClick}><strong>Create</strong></MyLink>
+                    <MyLink onClick={handleTheme}>{
+                        darkmode === 'ligth'
+                            ?
+                            <img src={sun_logo} style={{ width: '1.6rem' }} alt="" />
+                            :
+                            <img src={moon_logo} style={{ width: '1.6rem' }} alt="" />
                     }</MyLink>
                     <form onSubmit={handleSubmit}>
                         <input type="text" value={input} onChange={handleChange} />

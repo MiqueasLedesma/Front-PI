@@ -80,3 +80,22 @@ export const getSearchGames = name => async dispatch => {
         console.log(error.message)
     }
 }
+
+export const postGame = obj => async () => {
+    console.log(obj)
+    try {
+        await axios.post('https://webapivideogames-miqueas.herokuapp.com/videogames', obj)
+            .then(r => Swal.fire({
+                title: "Succes!",
+                text: r.data,
+                type: "Succes"
+            }))
+    } catch (error) {
+        console.log(error.message);
+        return Swal.fire({
+            title: "Fail",
+            text: error.message,
+            type: "error"
+        })
+    }
+}

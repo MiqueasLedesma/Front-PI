@@ -40,10 +40,29 @@ const FilterContainer = styled.div`
         text-align: center;
         text-decoration: none;
         font-size: 16px;
+        border-radius: 15px;
         cursor: pointer;
         &:hover {
             background-color: red;
         }
+        @media screen and (min-width:768px) {
+                display: none;
+            }
+    }
+`
+const Button = styled.button`
+    height: 2.5rem;
+    background-color: #4CAF50;
+    transition: 300ms ease;
+    border: none;
+    color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    &:hover {
+        background-color: red;
     }
 `
 
@@ -84,6 +103,7 @@ export const Filters = ({ state, setState }) => {
                 </select><br />
                 <button onClick={() => setState({ page: 0 })}>Reset Filters</button>
             </FilterContainer>
+            <Button onClick={() => setState({ page: 0 })}>Reset Filters</Button>
         </ThemeProvider>
     )
 }

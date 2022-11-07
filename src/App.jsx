@@ -3,11 +3,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Navbar } from './components/Navbar';
 import { Videogames } from './components/Videogames';
 import { CreateGame } from './components/CreateGame';
-import { About } from './components/About';
 import { useEffect, useState } from 'react';
 import { Footer } from './components/Footer';
-import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames } from './redux/actions/videogamesActions';
+import { useSelector } from 'react-redux';
 import { theme } from './index';
 import { SearchGames } from './components/SearchGames';
 import { Detail } from './components/Detail';
@@ -31,14 +29,16 @@ function App() {
     changeRedux();
   }, [thema])
 
+
+
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
         <Navbar setState={setState} state={state} />
         <Routes>
           <Route path='/' element={state ? null : <Videogames />} />
+          <Route path='/games' element={state ? null : <Videogames />} />
           <Route path='/create' element={state ? null : <CreateGame />} />
-          {/* <Route path='/about' element={state ? null : <About />} /> */}
           <Route path='/detail' element={state ? null : <Detail />} />
           <Route path='/search' element={state ? null : <SearchGames />} />
         </Routes>

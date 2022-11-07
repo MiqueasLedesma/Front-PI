@@ -1,8 +1,6 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux'
 import styled from 'styled-components';
-import { getVideogames } from '../redux/actions/videogamesActions';
 
 const PaginateContainer = styled.div`
     text-align: center;
@@ -40,11 +38,11 @@ export const Pagination = ({ state, setState }) => {
     const currentPage = useSelector(e => e.videogamesReducer.page);
     const toRender = reduxState.pages;
     const handleClick = (e) => {
+        window.scrollTo(0, -1000);
         setState({
             ...state,
             page: e.target.value
         });
-        return window.scrollTo(0, -1000);
     }
 
     const paginate = (pages) => {

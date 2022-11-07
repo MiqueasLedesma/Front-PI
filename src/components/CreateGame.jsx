@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
+import Swal from 'sweetalert2';
 import { theme } from '../index';
+import { postGame } from '../redux/actions/videogamesActions';
 
 const FormContainer = styled.div`
     width: 100%;
@@ -13,42 +16,41 @@ const FormContainer = styled.div`
     text-align: center;
     form {
       color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
-      button {
-        height: 1.6rem;
-        background-color: #4CAF50;
-        border: none;
-        color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
-        text-align: center;
-        text-decoration: none;
-        font-size: 1rem;
-        cursor: pointer;
-      }
       .submit {
-          
+          height: 2.5rem;
+          background-color: #4CAF50;
+          transition: 300ms ease;
+          border: none;
+          color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
+          text-align: center;
+          text-decoration: none;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 15px;
+          &:hover {
+              background-color: red;
+          }
         }
-        .gender {
-          border: 2px solid black;
-        }
-        .platform{
-          border: 2px solid black;
-        }
+      .gender {
+        border: 2px solid black;
+      }
+      .platforms{
+        border: 2px solid black;
+      }
     }
 `
 
 export const CreateGame = () => {
-
+  const dispatch = useDispatch()
   const [state, setState] = useState({});
-
-  const [genders, setGenders] = useState([]);
+  const [genres, setgenres] = useState([]);
+  const plats = ['PC', 'XBOX', 'PS5', 'NINTENDO', 'WEB', 'OTHERS'];
+  const rating = [1, 2, 3, 4, 5];
 
   useEffect(() => {
     axios.get('https://webapivideogames-miqueas.herokuapp.com/genres')
-    .then(r => setGenders(r.data))
-  },[genders]);
-
-  const plats = ['PC', 'XBOX', 'PS5', 'NINTENDO', 'OTHERS'];
-  // const genders = ['ACTION', 'SHOOTER', 'ADVENTURES', 'RPG', 'STRATEGY'];
-  const rating = [1, 2, 3, 4, 5];
+      .then(r => setgenres(r.data))
+  }, []);
 
   const handleSelects = e => {
     if (state[e.target.name]) {
@@ -98,15 +100,18 @@ export const CreateGame = () => {
   const handleSubmit = e => {
     let errors = [];
     e.preventDefault();
-    if (!state.platform || !state.genders || !state.platform[0] || !state.rating || !state.description || !state.name) errors.push('form is incomplete');
-    if (state.genders && state.genders.length < 2) errors.push('must select almost 2 genders');
+    if (!state.platforms || !state.genres || !state.platforms[0] || !state.rating || !state.description || !state.name) errors.push('form is incomplete');
+    if (state.genres && state.genres.length < 2) errors.push('must select almost 2 genres');
     if (state.description && state.description.length <= 10) errors.push('description must have more than 10 characters')
     if (errors.length !== 0) {
-      return alert(`${errors.join(' - ')}`)
+      return Swal.fire({
+        title: "Fail!",
+        text: `${errors.join(' - ')}`,
+        type: "error"
+      })
     }
+    dispatch(postGame(state));
     setState({});
-    window.history.go('/');
-    return alert('succes!');
   }
 
 
@@ -126,20 +131,20 @@ export const CreateGame = () => {
           <input type="text" name="description" onChange={handleChange} />
           <br />
           <br />
-          {/* ---PLATFORMS--- */}
-          <select name="platform" value='none' onChange={handleSelects}>
-            <option selected>Platforms</option>
+          {/* ---platformsS--- */}
+          <select name="platforms" value='none' onChange={handleSelects}>
+            <option selected>platformss</option>
             {plats && plats.map((e, index) => <option key={index} value={e} >{e}</option>)}
           </select>
-          {state.platform && state.platform.map((e, index) => <button className='platform' name='platform' key={index} onClick={handleClick} value={e}>{e}</button>)}
+          {state.platforms && state.platforms.map((e, index) => <button className='platforms' name='platforms' key={index} onClick={handleClick} value={e}>{e}</button>)}
           <br />
           <br />
-          {/* ---GENDERS--- */}
-          <select name="genders" value='none' onChange={handleSelects}>
-            <option selected>Genders</option>
-            {genders && genders.map((e, index) => <option key={index} value={e}>{e}</option>)}
+          {/* ---genres--- */}
+          <select name="genres" value='none' onChange={handleSelects}>
+            <option selected>genres</option>
+            {genres && genres.map((e, index) => <option key={index} value={e}>{e}</option>)}
           </select>
-          {state.genders && state.genders.map((e, index) => <button className='gender' name='genders' key={index} onClick={handleClick} value={e}>{e}</button>)}
+          {state.genres && state.genres.map((e, index) => <button className='gender' name='genres' key={index} onClick={handleClick} value={e}>{e}</button>)}
           <br />
           <br />
           {/* ---RATING--- */}
