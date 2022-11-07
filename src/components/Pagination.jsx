@@ -36,7 +36,6 @@ const PaginateContainer = styled.div`
 `
 
 export const Pagination = ({ state, setState }) => {
-    const dispatch = useDispatch();
     const reduxState = useSelector(e => e.videogamesReducer.videogames);
     const currentPage = useSelector(e => e.videogamesReducer.page);
     const toRender = reduxState.pages;
@@ -45,7 +44,6 @@ export const Pagination = ({ state, setState }) => {
             ...state,
             page: e.target.value
         });
-        dispatch(getVideogames(state));
         return window.scrollTo(0, -1000);
     }
 

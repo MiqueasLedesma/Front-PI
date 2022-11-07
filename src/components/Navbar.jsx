@@ -42,8 +42,8 @@ const NavContainer = styled.nav`
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        /* transition: all .5s ease; */
         ${MyLink}{
+            transition: 300ms ease;
             user-select: none;
             color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
             font-size: 2rem;
@@ -159,7 +159,6 @@ export const Navbar = ({ state, setState }) => {
             return setDarkmode(localStorage.theme);
         }
     }
-
 
     if (window.innerWidth > 768 && clicked) setClick(!clicked);
     const reduxState = useSelector(state => state.videogamesReducer.searchGames);

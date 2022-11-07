@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../index';
 
@@ -37,8 +39,15 @@ export const CreateGame = () => {
 
   const [state, setState] = useState({});
 
+  const [genders, setGenders] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://webapivideogames-miqueas.herokuapp.com/genres')
+    .then(r => setGenders(r.data))
+  },[genders]);
+
   const plats = ['PC', 'XBOX', 'PS5', 'NINTENDO', 'OTHERS'];
-  const genders = ['ACTION', 'SHOOTER', 'ADVENTURES', 'RPG', 'STRATEGY'];
+  // const genders = ['ACTION', 'SHOOTER', 'ADVENTURES', 'RPG', 'STRATEGY'];
   const rating = [1, 2, 3, 4, 5];
 
   const handleSelects = e => {

@@ -9,9 +9,6 @@ const FilterContainer = styled.div`
     text-align: center;
     display: inline-block;
     margin: 5px;
-    @media screen and (max-width:768px) {
-        display: table-row;
-    }
     h4 {
         font-weight: 600;
         display: inline;
@@ -21,23 +18,32 @@ const FilterContainer = styled.div`
         }
     }
     select {
+        cursor: pointer;
         width: fit-content;
-        min-height: 2.45rem;
+        min-height: 1rem;
         outline: none;
         padding: 5px;
-        cursor: pointer;
         margin-top: 5px;
         appearance: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        @media screen and (max-width:768px) {
+            font-size: .8rem;
+        }
     }
     button {
-        height: 2.45rem;
+        height: 2.5rem;
         background-color: #4CAF50;
+        transition: 300ms ease;
         border: none;
         color: ${props => localStorage.theme !== 'dark' ? props.theme.letterPrimary : props.theme.letterSecundary};
         text-align: center;
         text-decoration: none;
         font-size: 16px;
         cursor: pointer;
+        &:hover {
+            background-color: red;
+        }
     }
 `
 
@@ -46,7 +52,7 @@ export const Filters = ({ state, setState }) => {
     useEffect(async () => {
         await axios.get('https://webapivideogames-miqueas.herokuapp.com/genres')
             .then(r => setGenres(r.data))
-    }, [])
+    }, [state])
 
     const order = ['ASC', 'DESC'];
 
@@ -64,19 +70,19 @@ export const Filters = ({ state, setState }) => {
         <ThemeProvider theme={theme}>
             <FilterContainer>
                 <h4>Filter:  </h4>
-                    <select name="category" onChange={handleChange} id="">
-                        <option value="">Genre{state.category && `: ${state.category}`}</option>
-                        {Array.isArray(genres) && genres.map((e, index) => <option key={index} value={e}>{e}</option>)}
-                    </select>
-                    <select name="param" onChange={handleChange} id="">
-                        <option value="">Sort by{state.param && `: ${state.param}`}</option>
-                        {type && type.map((e, index) => <option key={index} value={e}>{e}</option>)}
-                    </select>
-                    <select name="sort" onChange={handleChange} id="">
-                        <option value="">Order{state.sort ? `: ${state.sort}` : ': DESC'}</option>
-                        {order && order.map((e, index) => <option key={index} value={e}>{e}</option>)}
-                    </select>
-                    <button onClick={() => setState({page:0})}>Reset Filters</button>
+                <select name="category" onChange={handleChange} id="">
+                    <option value="">Genre{state.category && `: ${state.category}`}</option>
+                    {Array.isArray(genres) && genres.map((e, index) => <option key={index} value={e}>{e}</option>)}
+                </select>
+                <select name="param" onChange={handleChange} id="">
+                    <option value="">Sort by{state.param && `: ${state.param}`}</option>
+                    {type && type.map((e, index) => <option key={index} value={e}>{e}</option>)}
+                </select>
+                <select name="sort" onChange={handleChange} id="">
+                    <option value="">Order{state.sort ? `: ${state.sort}` : ': DESC'}</option>
+                    {order && order.map((e, index) => <option key={index} value={e}>{e}</option>)}
+                </select><br />
+                <button onClick={() => setState({ page: 0 })}>Reset Filters</button>
             </FilterContainer>
         </ThemeProvider>
     )

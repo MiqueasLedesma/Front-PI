@@ -27,10 +27,7 @@ export const Videogames = () => {
     const reduxState = useSelector(state => state.videogamesReducer.videogames);
 
     useEffect(() => {
-        const changeRedux = () => {
-            dispatch(getVideogames(state));
-        }
-        changeRedux()
+        dispatch(getVideogames({...state}))
     }, [state])
 
     const toRender = reduxState.content && reduxState.content.map(e => {

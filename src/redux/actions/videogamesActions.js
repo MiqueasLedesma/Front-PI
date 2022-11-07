@@ -13,9 +13,6 @@ export const getVideogames = obj => async dispatch => {
             type: GET_VIDEOGAMES,
             payload: [],
             page: page || 0,
-            category: category || false,
-            param: param || false,
-            sort: sort || false
         })
         axios.get(`https://webapivideogames-miqueas.herokuapp.com/videogames/filter?page=${page || 0}${category ? '&category=' + category : ''}${param ? '&type=' + param : ''}${sort ? '&sort=' + sort : ''}`)
             .then(r => {
