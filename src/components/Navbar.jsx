@@ -173,7 +173,7 @@ export const Navbar = ({ state, setState }) => {
     return (
         <ThemeProvider theme={theme}>
             <NavContainer>
-                <MyLink to={'/'} onClick={handleClick}><h2>App <span>Videogames!</span></h2></MyLink>
+                <MyLink to={'/games'} onClick={handleClick}><h2>App <span>Videogames!</span></h2></MyLink>
                 <div className={`links ${clicked ? 'active' : null}`} active>
                     <MyLink to={'/create'} onClick={handleClick}><strong>Create</strong></MyLink>
                     <MyLink onClick={handleTheme}>{

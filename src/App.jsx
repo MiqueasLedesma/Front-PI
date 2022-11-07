@@ -9,11 +9,14 @@ import { useSelector } from 'react-redux';
 import { theme } from './index';
 import { SearchGames } from './components/SearchGames';
 import { Detail } from './components/Detail';
+import { LandingPage } from './components/LandingPage';
+
 
 const AppContainer = styled.div`
     margin: 0;
     padding: 0;
     background-color: ${props => localStorage.theme !== 'dark' ? props.theme.primaryBack : props.theme.secundaryBack};
+    background-image: ${props => props.theme.landingImage};
 `
 
 if (!localStorage.theme) localStorage.setItem('theme', 'ligth');
@@ -36,7 +39,7 @@ function App() {
       <AppContainer>
         <Navbar setState={setState} state={state} />
         <Routes>
-          <Route path='/' element={state ? null : <Videogames />} />
+          <Route path='/' element={state ? null : <LandingPage />} />
           <Route path='/games' element={state ? null : <Videogames />} />
           <Route path='/create' element={state ? null : <CreateGame />} />
           <Route path='/detail' element={state ? null : <Detail />} />

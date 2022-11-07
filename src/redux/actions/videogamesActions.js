@@ -20,7 +20,7 @@ export const getVideogames = obj => async dispatch => {
                     title: "No match",
                     text: "The database don't have any game like that!",
                     type: "success"
-                }).then(() => window.history.go('/'))
+                }).then(() => window.history.go('/games'))
                 return dispatch({
                     type: GET_VIDEOGAMES,
                     payload: r.data,
@@ -69,7 +69,7 @@ export const getSearchGames = name => async dispatch => {
                         title: "Videogame not founded!",
                         text: "is not here :(!",
                         type: "success"
-                    }).then(() => window.history.go('/'))
+                    }).then(() => window.history.go('/games'))
                 }
                 return dispatch({
                     type: GET_SEARCH_GAMES,
