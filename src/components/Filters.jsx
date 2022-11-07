@@ -64,6 +64,9 @@ const Button = styled.button`
     &:hover {
         background-color: red;
     }
+    @media screen and (max-width:768px) {
+                display: none;
+            }
 `
 
 export const Filters = ({ state, setState }) => {

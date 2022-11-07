@@ -75,6 +75,10 @@ const NavContainer = styled.nav`
                 text-decoration: none;
                 font-size: 16px;
                 cursor: pointer;
+                transition: 300ms ease;
+                &:hover {
+                    background-color: #00f1ff;
+                }
             }
         }
         @media(min-width: 768px){
@@ -145,13 +149,11 @@ export const Navbar = ({ state, setState }) => {
 
     const handleChange = e => {
         setInput(e.target.value);
-        handleClick(e);
-
     }
 
 
     const handleTheme = () => {
-
+        handleClick()
         if (localStorage.theme === 'ligth') {
             window.localStorage.setItem('theme', 'dark');
             dispatch(changeTheme())

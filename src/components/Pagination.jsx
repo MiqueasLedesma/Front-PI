@@ -53,6 +53,8 @@ export const Pagination = ({ state, setState }) => {
         return arr;
     }
 
+    if(toRender === 0) return <></>
+
     return (
         <PaginateContainer>
             <div className='pagination'>
