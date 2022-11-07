@@ -133,7 +133,7 @@ export const CreateGame = () => {
           <br />
           {/* ---platformsS--- */}
           <select name="platforms" value='none' onChange={handleSelects}>
-            <option selected>platformss</option>
+            <option selected>Platforms</option>
             {plats && plats.map((e, index) => <option key={index} value={e} >{e}</option>)}
           </select>
           {state.platforms && state.platforms.map((e, index) => <button className='platforms' name='platforms' key={index} onClick={handleClick} value={e}>{e}</button>)}
@@ -141,7 +141,7 @@ export const CreateGame = () => {
           <br />
           {/* ---genres--- */}
           <select name="genres" value='none' onChange={handleSelects}>
-            <option selected>genres</option>
+            <option selected>Genres</option>
             {genres && genres.map((e, index) => <option key={index} value={e}>{e}</option>)}
           </select>
           {state.genres && state.genres.map((e, index) => <button className='gender' name='genres' key={index} onClick={handleClick} value={e}>{e}</button>)}
