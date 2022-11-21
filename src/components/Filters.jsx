@@ -72,7 +72,7 @@ const Button = styled.button`
 export const Filters = ({ state, setState }) => {
     const [genres, setGenres] = useState([]);
     useEffect(async () => {
-        await axios.get('https://webapivideogames-miqueas.herokuapp.com/genres')
+        await axios.get('https://miqueaswebapi.onrender.com/genres')
             .then(r => setGenres(r.data))
     }, [state])
 
