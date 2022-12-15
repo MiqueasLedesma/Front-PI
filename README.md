@@ -1,5 +1,6 @@
 # Front-PI
-Frontend de Videogames-App realizado en el bootcamp Soy Henry 😁
+Frontend de Videogames-App realizado en el bootcamp Soy Henry 😁 <br />
+Repositorio del back-end: https://github.com/MiqueasLedesma/Back-PI
 <h2>Tecnologias utlizadas 💻</h2>
 <ul>
   <li>Node.js</li>
